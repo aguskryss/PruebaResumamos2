@@ -1,0 +1,132 @@
+﻿@using Proyectofinal.Models
+@{
+    ViewBag.Title = "Quienes Somos";
+}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+        <title>Resumamos-Nosotrs</title>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    </head>
+
+
+<body>
+    <style>
+        .foto {
+            width: 150px;
+            height: 150px;
+        }
+
+        .team .member {
+            text-align: center;
+            margin-bottom: 20px;
+            box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.1);
+            padding: 30px 20px;
+            background: #fff;
+        }
+
+            .team .member img {
+                max-width: 60%;
+                border-radius: 50%;
+                margin: 0 0 30px 0;
+            }
+
+            .team .member h4 {
+                font-weight: 700;
+                margin-bottom: 2px;
+                font-size: 18px;
+            }
+
+            .team .member span {
+                font-style: italic;
+                display: block;
+                font-size: 13px;
+            }
+
+            .team .member p {
+                padding-top: 10px;
+                font-size: 14px;
+                font-style: italic;
+                color: #aaaaaa;
+            }
+
+            .team .member .social {
+                margin-top: 15px;
+            }
+
+                .team .member .social a {
+                    color: #919191;
+                    transition: 0.3s;
+                }
+
+                    .team .member .social a:hover {
+                        color: #e96b56;
+                    }
+
+                .team .member .social i {
+                    font-size: 18px;
+                    margin: 0 2px;
+                }
+    </style>
+    <section id="team" class="team">
+        <div class="container">
+            <br />
+            <br />
+            <div class="section-title" data-aos="fade-up">
+                <h2 style="text-align:center !important"><b>Nuestro Equipo</b></h2>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6  align-items-stretch">
+                    <div class="member">
+                        <img src="~/Content/yo.jpeg" alt="" class="foto">
+
+                        <h4>Agustin Kryss</h4>
+                        <span>CEO</span>
+                        <p>
+                            Alumno del ultimo año de la orientacion informatica en la escuela tecnica ORT
+                        </p>
+                        <div class="social">
+                            <a href="https://twitter.com/aguskryss"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.facebook.com/agustin.kryss"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com/agus_kryss/"><i class="fab fa-instagram"></i></a>
+                            <a href="https://www.linkedin.com/in/agust%C3%ADn-kryss/"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-6 col-md-6  align-items-stretch">
+                    <div class="member">
+                        <img src="~/Content/benda.jpeg" alt="" class="foto">
+                        <h4>Alberto Bendayan</h4>
+                        <span>CEO</span>
+                        <p>
+                            Alumno del ultimo año de la orientacion informatica en la escuela tecnica ORT
+                        </p>
+                        <div class="social">
+                            <a href=""><i class="fab fa-twitter"></i></a>
+                            <a href=""><i class="fab fa-facebook-f"></i></a>
+                            <a href=""><i class="fab fa-instagram"></i></a>
+                            <a href=""><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>

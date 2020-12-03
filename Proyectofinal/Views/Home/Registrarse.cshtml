@@ -1,0 +1,109 @@
+﻿@using Proyectofinal.Models
+@model Usuarios
+@{
+    ViewBag.Title = "Registrarse";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <link href="Content/bootstrap.css" rel="stylesheet" type="text/css">
+    <script src="~/Scripts/jquery-3.5.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+    <title>Resumamos-Registrarse</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+
+   
+    <div class="container">
+        <h2 class="Titulo"><b>Registrarse</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 col-12">
+                @using (Html.BeginForm("DespuesDeRegistrarse", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <center>
+                        <div class="form-group-sm">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" style="box-shadow: 0 1px 4px -1px black;" class="form-control" placeholder="Nombre" @Html.TextBoxFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre) <br />
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" style="box-shadow: 0 1px 4px -1px black;" class="form-control" placeholder="Apellido" @Html.TextBoxFor(model => model.Apellido) @Html.ValidationMessageFor(model => model.Apellido) <br />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" style="box-shadow: 0 1px 4px -1px black;" class="form-control" placeholder="Mail" @Html.TextBoxFor(model => model.Mail) @Html.ValidationMessageFor(model => model.Mail) <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" style="box-shadow: 0 1px 4px -1px black;" class="form-control" placeholder="Usuario" @Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username) <br />
+                                        @if (ViewBag.us == true)
+                                        {
+                                            <small>Nombre de usuario ya existente</small>
+                                        }
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="password" style="box-shadow: 0 1px 4px -1px black;" class="form-control" placeholder="Contraseña" @Html.TextBoxFor(model => model.Contrasena) @Html.ValidationMessageFor(model => model.Contrasena) <br />
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="password" style="box-shadow: 0 1px 4px -1px black;" class="form-control" placeholder="Repetir Contraseña" @Html.TextBoxFor(model => model.Contra2) @Html.ValidationMessageFor(model => model.Contra2) <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2 col-4">
+                                        <h4><b class="txtSubirRes">Escuela:</b></h4>
+                                    </div>
+                                    <div class="col-md-10  col-8">
+                                        <select class="form-control" style="box-shadow: 0 1px 4px -1px black;" @Html.DropDownListFor(model => model.Escuela, new SelectList(ViewBag.ListaEscuelas, "IdEscuela", "NombreEscuela"))<br />
+                                    </div>
+                                </div>
+                                
+                                <br />
+                                <center>
+                                    <h4><b class="txtSubirRes">Foto de perfil:</b></h4>@Html.TextBoxFor(model => model.Archivo, new { type = "file" })<br />
+                                </center>
+                                <!--Hidden fors-->
+                                @Html.HiddenFor(model => model.Admin)
+                                @Html.HiddenFor(model => model.Puntuacion, 0)
+                                @Html.HiddenFor(model => model.Creditos, 100)
+                                <input type="submit" class="btn btn-primary " style="box-shadow: 0 1px 4px -1px black;" value="Registrarse" />
+                                
+                            </div>
+                        </div>
+                    </center>
+                }
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+    </div>
+</body>
+</html>

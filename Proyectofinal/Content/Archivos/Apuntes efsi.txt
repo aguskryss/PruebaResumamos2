@@ -1,0 +1,48 @@
+DNS= Domain Name Server
+IP= (0-255).(0-255).(0-255).(0-255)
+cada vez q entras a una pagina en internet, se crea una tabla de dns
+
+Vos cdo entras a una pagina, tu computadora se fija en un DNS local para ver cual es el IP
+Si tu DNS local no sabe el IP de esa pagina, se fija en un DNS server
+Si el DNS server tampoco sabe, se fija en otro DNS server y asi hasta que lo encuentre
+
+HTTP request: la primera linea indica el metodo a ejecutar y dsps manda mas parametros
+
+GET: Los parametros se ven en la URL y x lo tanto no debemos mandar contraseñas y tiene un maximo de 2000 caracteres.
+
+POST: No tiene un maximo de cosas para mandar y los parametros no se ven en la URL.
+
+CODIGOS DE ERROR: hay un monton y para todas las peticiones hay un codigo de error.
+
+URL: es un string q contiene:
+Protocolo (http/https)
+Nombre de dominio o direccion IP
+Nombre de puerto (opcional)
+Nombre del recurso o programa pedido
+cadena de consulta(opcional)
+Identificador de fragmento (opcional) sirve para ir a una parte especifica de una pagina
+
+SITIO WEB:
+tiene un dominio y un hosting
+
+Browser=buscador (chroome/explorer)
+
+CLIENTE: son los dispositivos (los cotidianos) q interactuan con los servidores
+el cliente y el servidor tienen lenguajes distintos.
+
+Lenguajes de clientes/Front end
+Lenguajes de servidores/Back end
+Full stack (el q programa los dos)
+
+Framework: librerias preescritas q  ayudan a programar
+
+Java != Javascript
+
+LOGIN
+Pantalla: frontend
+logica: backend
+
+Sitio Web: es un sitio estatico en el cual solo se muestra informacion
+App Web: es uno en el cual se muestra y se sube informacion.
+
+Responsive: q se ve bien en celu y compu

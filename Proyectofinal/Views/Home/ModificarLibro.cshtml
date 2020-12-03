@@ -1,0 +1,155 @@
+﻿@using Proyectofinal.Models
+@model Libro
+@{
+    ViewBag.Title = "Modificar Libro";
+    Libro li = BD.TraerLibro(ViewBag.id);
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Resumamos-Cambiar libro</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+
+    
+    <div class="container">
+        <h2 class="Titulo"><b>Modificar libro</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                @using (Html.BeginForm("DespuesDeModificarLibro", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <center>
+                        <div class="form-group-sm">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Nombre :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Nombre" value="@li.Nombre" @Html.TextBoxFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Precio :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Precio" value="@li.Precio" @Html.TextBoxFor(model => model.Precio) @Html.ValidationMessageFor(model => model.Precio) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Editorial :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Editorial" value="@li.Editorial" @Html.TextBoxFor(model => model.Editorial) @Html.ValidationMessageFor(model => model.Editorial) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Lugar :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Lugar" value="@li.Lugar" @Html.TextBoxFor(model => model.Lugar) @Html.ValidationMessageFor(model => model.Lugar) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Division :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Division" value="@li.Division" @Html.TextBoxFor(model => model.Division) @Html.ValidationMessageFor(model => model.Division) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Telefono :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Telefono" value="@li.Telefono" @Html.TextBoxFor(model => model.Telefono) @Html.ValidationMessageFor(model => model.Telefono) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Materia:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px grey;" @Html.DropDownListFor(model => model.FkMateria, new SelectList(ViewBag.ListaMaterias, "IdMateria", "NombreMateria"))<br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Escuela:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px grey;" @Html.DropDownListFor(model => model.FkEscuela, new SelectList(ViewBag.ListaEscuelas, "IdEscuela", "NombreEscuela"))<br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Año:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px grey;" @Html.DropDownListFor(model => model.FkAno, new SelectList(ViewBag.ListaAños, "a", "escri"))<br />
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Descripcion:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 3px 10px -3px black;" class="form-control" placeholder="Descripcion" value="@li.Descripcion" @Html.TextBoxFor(model => model.Descripcion) @Html.ValidationMessageFor(model => model.Descripcion) <br />
+                                    </div>
+
+                                </div>
+
+
+
+                                <br />
+                                <center>
+                                    @Html.TextBoxFor(model => model.Imagen, new { type = "file" })<br />
+                                </center>
+                                <!--Hidden fors-->
+                                @Html.HiddenFor(model => model.FkVendedor, new { Value = Session["id"] })
+                                @Html.HiddenFor(model => model.Aprobado, false)
+                                @Html.HiddenFor(model => model.NombreImagen, new { Value = li.NombreImagen })
+                                @Html.HiddenFor(model => model.FkComprador, -1)
+                                @Html.HiddenFor(model=> model.LinkMP)
+                                @Html.HiddenFor(model => model.IdLibro, new { Value = li.IdLibro })
+                                <input type="submit" class="btn btn-primary " value="Modificar Libro" />
+                            </div>
+                        </div>
+                    </center>
+                }
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+
+
+

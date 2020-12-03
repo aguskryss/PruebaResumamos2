@@ -1,0 +1,86 @@
+﻿@using Proyectofinal.Models;
+@model Materia
+@{
+    ViewBag.Title = "Borrar materias";
+    List<Materia> Lista = BD.TraerMateria();
+
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <title>Resumamos</title>
+</head>
+    <body>
+        <br />
+        <br />
+        
+        <div class="container">
+            <h3 style="text-align:center;"><b>Eliminar materias</b></h3>
+            <div class="row">
+
+
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Nombre materia</th>
+                            <th scope="col">Eliminar</th>
+                            <th scope="col">Nombre materia</th>
+                            <th scope="col">Eliminar</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @for (int i = 0; i < Lista.Count; i += 2)
+                        {
+                            <tr>
+                                <th>@Lista[i].NombreMateria</th>
+                                <td>
+                                    <a type="Button" class="btn btn-danger btn-sm" href="@Url.Action("BorrarEsta", "Backoffice", new { id = Lista[i].IdMateria })">Eliminar</a>
+                                </td>
+
+                                @if (i + 1 < Lista.Count)
+                                {
+
+                                <th>@Lista[i + 1].NombreMateria</th>
+                                <td>
+                                    <a type="Button" class="btn btn-danger btn-sm" href="@Url.Action("BorrarEsta", "Backoffice", new { id = Lista[i + 1].IdMateria })">Eliminar</a>
+                                </td>
+
+                                }
+                                else
+                                {
+                            
+                                <th>
+
+                                </th>
+                                <td>
+                                </td>
+                            
+                            }
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <br />
+        <center>
+            <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+        </center>
+        <br />
+        <br />
+    </body>
+</html>

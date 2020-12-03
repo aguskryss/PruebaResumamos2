@@ -1,0 +1,121 @@
+﻿@using Proyectofinal.Models
+@model Resumenes
+@{
+    ViewBag.Title = "Subir Resumen";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Resumamos-Subir resumen</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+   
+    <div class="container">
+        <h2 class="Titulo"><b>Subir resumen</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10 col-12">
+                @using (Html.BeginForm("InsertarResumen", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <center>
+                        <div class="form-group-sm">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Titulo resumen:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input style="box-shadow: 0 2px 6px -2px black;" type="text" class="form-control" placeholder="Nombre" required @Html.TextBoxFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre) <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Materia:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select style="box-shadow: 0 2px 6px -2px black;" class="form-control" required @Html.DropDownListFor(model => model.FkMateria, new SelectList(ViewBag.ListaMaterias, "IdMateria", "NombreMateria"))<br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Escuela:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select  style="box-shadow: 0 2px 6px -2px black;" class="form-control" required @Html.DropDownListFor(model => model.FkEscuela, new SelectList(ViewBag.ListaEscuelas, "IdEscuela", "NombreEscuela"))<br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Año:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select style="box-shadow: 0 2px 6px -2px black;" class="form-control" required @Html.DropDownListFor(model => model.Ano, new SelectList(ViewBag.ListaAños, "a", "escri"))<br />
+                                    </div>
+
+                                </div>
+
+
+
+                                <div class="row form-group">
+                                    <div class="col-md-2">
+                                        <h4 for="exampleFormControlTextarea1"><b class="txtSubirRes">Descripcion:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input style="box-shadow: 0 2px 6px -2px black;" type="text" class="form-control" rows="3" required placeholder="Descripcion" @Html.TextAreaFor(model => model.Descripcion)
+
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Tags:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input style="box-shadow: 0 2px 6px -2px black;" type="text" class="form-control" required placeholder="Suma,Resta,Multiplicacion" @Html.TextBoxFor(model => model.Categorias)
+                                        <h6 class="col-lg-5">Ingrese las categorias separadas por una coma </h6><br />
+                                    </div>
+                                </div>
+                                <br />
+                                <center>
+
+                                    <input required @Html.TextBoxFor(model => model.Archivo, new { type = "file" }) <br />
+                                    <h6 class="col-lg-5">Solo se puede subir un archivo </h6><br />
+
+                                </center>
+                                <!--Hidden fors-->
+                                @Html.HiddenFor(model => model.FkUsuario, new { Value = Session["id"] })
+                                @Html.HiddenFor(model => model.Fecha, new { Value = @DateTime.Now })
+                                @Html.HiddenFor(model => model.Puntuacion, 0)
+                                @Html.HiddenFor(model => model.Aprobado, false)
+                                <input type="submit" class="btn btn-primary " value="Subir Resumen" style="box-shadow: 0 2px 6px -2px black;"/>
+                            </div>
+                        </div>
+                    </center>
+                }
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+
+    </div>
+</body>
+</html>

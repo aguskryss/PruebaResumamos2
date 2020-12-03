@@ -1,0 +1,109 @@
+﻿@using Proyectofinal.Models
+@model Libro
+@{
+    ViewBag.Title = "Subir libro";
+    ViewBag.listaMaterias = BD.TraerMateria();
+    ViewBag.ListaEscuelas = BD.TraerEscuelas();
+    ViewBag.ListaAños = BD.TraerAños();
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Resumamos-Publicar libro</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+    
+    <div class="container">
+        <h2 class="Titulo"><b>Publica tu libro</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 col-12">
+                @using (Html.BeginForm("DespuesDeInsertarLibro", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <center>
+                        <div class="form-group-sm">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px black;" required class="form-control" placeholder="Nombre libro" @Html.TextBoxFor(model => model.Nombre) <br />
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px black;" class="form-control" placeholder="Editorial" @Html.TextBoxFor(model => model.Editorial) <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 col-6">
+                                        <input type="number" style="box-shadow: 0 2px 6px -2px black;" class="form-control" required placeholder="Precio" value="" @Html.TextBoxFor(model => model.Precio) <br />
+                                    </div>
+                                    <div class="col-md-8  col-6">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px black;" @Html.DropDownListFor(model => model.FkMateria, new SelectList(ViewBag.listaMaterias, "IdMateria", "NombreMateria"))<br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-12 col-md-8">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px black;" class="form-control" required placeholder="Lugar a retirar" @Html.TextBoxFor(model => model.Lugar) <br />
+                                    </div>
+                                    <div class="col-12 col-md-4">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px black;" required @Html.DropDownListFor(model => model.FkAno, new SelectList(ViewBag.ListaAños, "a", "escri"))<br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2 col-4">
+                                        <h4><b class="txtSubirRes">Escuela:</b></h4>
+                                    </div>
+                                    <div class="col-md-10  col-8">
+                                        <select style="box-shadow: 0 2px 6px -2px black;" class="form-control" @Html.DropDownListFor(model => model.FkEscuela, new SelectList(ViewBag.ListaEscuelas, "IdEscuela", "NombreEscuela"))<br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 col-12">
+                                        <input style="box-shadow: 0 2px 6px -2px black;" type="number" class="form-control" required placeholder="Celular" value="" @Html.TextBoxFor(model => model.Telefono) <br />
+                                    </div>
+                                    <div class="col-md-6  col-12">
+                                        <input style="box-shadow: 0 2px 6px -2px black;" type="text" class="form-control" required placeholder="Division" value="" @Html.TextBoxFor(model => model.Division) <br />
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @Html.TextAreaFor(model => model.Descripcion, new { @class = "form-control" })
+                                    </div>
+                                </div>
+
+                                <br />
+                                <center>
+                                    <h4><b class="txtSubirRes">Foto del libro:</b></h4>@Html.TextBoxFor(model => model.Imagen, new { type = "file" })<br />
+                                </center>
+                                @Html.HiddenFor(model => model.FkVendedor)
+                                @Html.HiddenFor(model=>model.LinkMP)
+                                <input type="submit" class="btn btn-primary " style="box-shadow: 0 2px 6px -2px black;" value="Publicar libro" />
+
+                            </div>
+                        </div>
+                    </center>
+                }
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+    </div>
+</body>
+</html>

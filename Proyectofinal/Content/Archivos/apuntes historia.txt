@@ -1,0 +1,27 @@
+APUNTES HISTORIA:
+No tiene nada de historia, es solo humo. Es todo programacion y en papel.
+Analisis de la programacion orientada a objetos
+q es un objeto? una variable del tipo de una clase es una instancia de una clase, esta t
+iene varias variables adentros, tiene acciones no secuenciales.
+q es una clase? tiene atributos y metodos. los atributos son las caracteristicas
+como el color y el largo. Los metodos es lo q sabe hacer esta clase.
+
+DIBUJAR CLASES:
+Rectangulo dividido en 3 secciones:
+
+Sec 1: Nombre de la clase, tiene q estar en mayuscula, singular y para cada  seccion se usa el metodo de escritura CamelCase (pirmera letra mayuscula)
+
+Sec 2: Atributos, Cada uno tiene q tener: visibilidad (si es public o private), tipo de dato, nombre atributo en minuscula y singular
+
+Sec 3: Metodos, Son verbos siempre en infinitivo, tiene q tener la visibilidad, nombre de metodo, tipos de argumentos que recibe y tipo de dato que devuelve.
+
+Las clases son los sustantivos, los atributos los adjetivos y los metodos los verbos
+
+No todos los sustantivos son clases, pero todas las clases son sustantivos.
+
+Visbilidad: si es privado se pone (-) y si es publico se pone (+)
+
+
+
+
+

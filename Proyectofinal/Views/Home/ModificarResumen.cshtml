@@ -1,0 +1,119 @@
+﻿@using Proyectofinal.Models
+@model Resumenes
+@{
+    ViewBag.Title = "Modificar resumen";
+    Resumenes res = BD.TraerResumen(ViewBag.id);
+    string tags = "";
+    List<int> l = BD.TraerIdTagsXResumen(ViewBag.id);
+    foreach (int i in l)
+    {
+        tags =tags+", "+BD.TraerTagXid(i);
+    }
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Resumamos-Cambiar resumen</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+ 
+    <div class="container">
+        <h2 class="Titulo"><b>Modificar resumen</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-1"></div>
+            <div class="col-lg-10">
+                @using (Html.BeginForm("DespuesDeModificarResumen", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <center>
+                        <div class="form-group-sm">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Nombre :</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" style="box-shadow: 0 2px 6px -2px grey;" class="form-control" placeholder="Nombre" value="@res.Nombre" @Html.TextBoxFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre) <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Escuela:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px grey;" @Html.DropDownListFor(model => model.FkEscuela, new SelectList(ViewBag.ListaEscuelas, "IdEscuela", "NombreEscuela"))<br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Año:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <select class="form-control" style="box-shadow: 0 2px 6px -2px grey;" @Html.DropDownListFor(model => model.Ano, new SelectList(ViewBag.ListaAños, "a", "escri"))<br />
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Descripcion:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" style="box-shadow: 0 2px 6px -2px grey;" placeholder="Descripcion" value="@res.Descripcion" @Html.TextBoxFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre) <br />
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <h4><b class="txtSubirRes">Tags:</b></h4>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <input type="text" class="form-control" style="box-shadow: 0 2px 6px -2px grey;" placeholder="Suma,Resta,Multiplicacion" @Html.TextBoxFor(model => model.Categorias)
+                                        <h6>Tags anteriores: @tags</h6><br />
+                                    </div>
+                                </div>
+                                <br />
+                                <center>
+                                    @Html.TextBoxFor(model => model.Archivo, new { type = "file" })<br />
+                                </center>
+                                <!--Hidden fors-->
+                                @Html.HiddenFor(model => model.FkUsuario, new { Value = Session["id"] })
+                                @Html.HiddenFor(model => model.Fecha, new { Value = @DateTime.Now })
+                                @Html.HiddenFor(model => model.Puntuacion, 0)
+                                @Html.HiddenFor(model => model.Aprobado, false)
+                                @Html.HiddenFor(model => model.NombreImagen, new { Value = res.NombreImagen })
+                                @Html.HiddenFor(model => model.FkMateria, 1)
+                                @Html.HiddenFor(model => model.IdResumen, new { Value = res.IdResumen })
+                                <input type="submit" class="btn btn-primary " style="box-shadow: 0 2px 6px -2px grey;" value="Modificar Resumen" />
+                            </div>
+                        </div>
+                    </center>
+                }
+            </div>
+            <div class="col-lg-1"></div>
+        </div>
+
+    </div>
+</body>
+</html>
+
+

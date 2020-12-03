@@ -1,0 +1,126 @@
+﻿@using Proyectofinal.Models
+@using MercadoPago;
+@using MercadoPago.DataStructures.Payment;
+@using MercadoPago.Resources;
+@{
+    ViewBag.Title = "Libro";
+    Libro lib = BD.TraerLibro(ViewBag.id);
+    if (Session["id"] != null)
+    {
+        ViewBag.boquita = 1;
+    }
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title>Resumamos-Libro</title>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-6 col-xs-6">
+                @if (lib.NombreImagen != "")
+                {
+                    <img src="~/Content/Archivos/@lib.NombreImagen" height="250px" width="250px" alt="Imagen libro">
+                }
+            </div>
+            <div class="col-md-2"></div>
+            <div class="col-md-6 col-6 col-xs-6">
+                <center>
+                    <h2>@lib.Nombre</h2>
+                    <h4>$@lib.Precio</h4>
+                    <h4>@BD.TraerMateriaxId(lib.FkMateria).NombreMateria</h4>
+                    <h5>Se retira por: @lib.Lugar </h5>
+
+                    <div class="container">
+                        <div class="row">
+                            @if (Session["id"] != null)
+                            {
+                            <div class="col-md-6 col-xs-6">
+                                <a mp-mode="dftl" href="@lib.LinkMP" name="MP-payButton" class='btn btn-primary btn-block'>Pagar</a>
+                               
+                                <!--<a href="@Url.Action("Comprar", "Home")"  role="button">Comprar <i class="fas fa-dollar-sign"></i></a>-->
+                            </div>
+                                <div class="col-md-6 col-xs-6">
+                                    @if (ViewBag.Guardo == -1)
+                                    {
+                                        <a href="@Url.Action("GuardarLibro", "Home", new { Id = lib.IdLibro })" class="btn btn-success btn-block" role="button">Guardar <i class="far fa-file"></i></a>
+                                    }
+                                    else
+                                    {
+                                        <a href="@Url.Action("GuardarLibro", "Home", new { Id = lib.IdLibro})" class="btn btn-success btn-block" role="button">Eliminar de guardado <i class="fas fa-file"></i></a>
+                                    }
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="col-md-6 col-xs-6">
+                                    <button href="#" class="btn btn-success btn-block" role="button" disabled>Comprar <i class="fas fa-dollar-sign"></i></button>
+                                </div>
+                                <div class="col-md-6 col-xs-6">
+                                    <button href="#" class="btn btn-success btn-block" role="button" disabled>Guardar <i class="far fa-file"></i></button>
+                                </div>
+
+                            }
+                        </div>
+                    </div>
+                </center>
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="container">
+            <div class="row">
+                <h4><b>Caracteristicas:</b></h4>
+            </div>
+            <div class="row">
+                <div class="col-md-3 col-4 col-xs-4">
+                    <h6><b>Vendedor:</b> @BD.TraerNombreUsuario(lib.FkVendedor)</h6>
+                </div>
+                <div class="col-md-2 col-4 col-xs-4">
+                    <h6><b>Editorial:</b> @lib.Editorial</h6>
+                </div>
+                <div class="col-md-2 col-4 col-xs-4">
+                    <h6><b>Año:</b> @BD.TraerAñoXid(lib.FkAno).escri</h6>
+                </div>
+                <div class="col-md-2 col-6 col-xs-4">
+                    <h6><b>Escuela:</b> @BD.TraerEscuelaxId(lib.FkEscuela).NombreEscuela</h6>
+                </div>
+                <div class="col-md-3 col-6 col-xs-4">
+                    <h6><b>Telefono:</b> @lib.Telefono</h6>
+                </div>
+            </div>
+
+            <br />
+            <br />
+            <div class="row">
+                <h5><b>Descripcion:</b> @lib.Descripcion</h5>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

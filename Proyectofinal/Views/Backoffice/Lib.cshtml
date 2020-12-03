@@ -1,0 +1,108 @@
+﻿@using Proyectofinal.Models
+@{
+    ViewBag.Title = "Libro";
+    Libro lib = BD.TraerLibro(ViewBag.id);
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+  
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4 col-6 col-xs-5">
+                @if (lib.NombreImagen != "")
+                {
+                    <img src="~/Content/Archivos/@lib.NombreImagen" height="250px" width="200px" alt="Imagen libro">
+                }
+            </div>
+            <div class="col-xs-2"></div>
+            <div class="col-md-6 col-6 col-xs-5">
+                <h2>@lib.Nombre</h2>
+                <h4>$@lib.Precio</h4>
+                <h4>@BD.TraerMateriaxId(lib.FkMateria).NombreMateria</h4>
+                <h5>Se retira por: @lib.Lugar </h5>
+
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12 col-xs-12">
+                <a href="@Url.Action("BorrarL", "Backoffice", new { id = lib.IdLibro })" class="btn btn-outline-danger btn-block" role="button">Eliminar <i class="fas fa-trash"></i></a>
+            </div>
+
+            <br />
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <div class="row">
+            <h4><b>Caracteristicas:</b></h4>
+        </div>
+        <div class="row">
+            <div class="col-md-3 col-4">
+                <h6><b>Vendedor:</b> @BD.TraerNombreUsuario(lib.FkVendedor)</h6>
+            </div>
+            <div class="col-md-2 col-4">
+                <h6><b>Editorial:</b> @lib.Editorial</h6>
+            </div>
+            <div class="col-md-2 col-4">
+                <h6><b>Año:</b> @BD.TraerAñoXid(lib.FkAno).escri</h6>
+            </div>
+            <div class="col-md-2 col-6">
+                <h6><b>Escuela:</b> @BD.TraerEscuelaxId(lib.FkEscuela).NombreEscuela</h6>
+            </div>
+            <div class="col-md-3 col-6">
+                <h6><b>Telefono:</b> @lib.Telefono</h6>
+            </div>
+        </div>
+        <br />
+        <br />
+        <div class="row">
+            <h5>Descripcion: @lib.Descripcion</h5>
+        </div>
+
+        <br /> 
+        <center>
+            <div class="row">
+
+                <div class="col-lg-6 col-xs-6">
+                    <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+
+                </div>
+                <div class="col-lg-6 col-xs-6">
+                    <a type="Button" class="btn btn-primary" href="@Url.Action("BorrarLibros", "Backoffice")">Volver a ver libros <i class="fas fa-book-open"></i></a>
+
+                </div>
+
+            </div>
+        </center>
+        <br />
+        <br />
+    </div>
+</body>
+</html>

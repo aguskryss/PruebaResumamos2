@@ -1,0 +1,146 @@
+﻿.header {
+    width: 100%;
+    height: 0%;
+    background-color: #2a6c8b;
+    box-shadow: 0 2px 15px -2px #2a6c8b;
+    padding-bottom: -10px;
+}
+
+.tode {
+    clear: both;
+    display: inline-block;
+    width: 100%;
+    background-color: #ffffff;
+    padding-bottom: 35px;
+    padding-top: 0px;
+    margin-top: -5px;
+    margin-bottom: 0px;
+}
+
+
+.logo {
+    width: 20%;
+    height: 8%;
+    padding-left: 50px;
+    padding-top: 5px;
+}
+.card {
+    margin-top: 20px;
+    width: auto;
+    height: auto;
+    background-size: 40px;
+    height: auto;
+    max-width: 500px;
+    max-height: 500px;
+    opacity: 0.8;
+    background-size: 300px;
+    background-color: white;
+    border-bottom-color: #17a2b8;
+    border-bottom: 4px solid #17a2b8;
+}
+.general {
+    background-color: aliceblue;
+    margin-top:-80px;
+}
+.card-text{
+    font-size:15px;
+    font-family:Arial;
+}
+.card-title{
+    font-size:17px;
+    text-align:center;
+}
+.verMas{
+    text-align:center;
+}
+.btn {
+    font-size: 20px;
+    margin-bottom: 30px;
+    margin-top: 20px;
+    margin-right:10px;
+    margin-left:10px;
+}
+.NombreUs {
+    text-align: right;
+    font-size: 18px;
+    margin-top: -50px !important;
+}
+.Titulo{
+    text-align:center;
+    font-size:30px;
+    font-family:Calibri;
+}
+.TituloEsc {
+    text-align: center;
+    font-size: 30px;
+    font-family: Calibri;
+    color:white;
+}
+.txtSubirRes{
+    text-align:left;
+    margin-right:auto;
+    font-size:20px;
+}
+.fa, .fas {
+    font-weight: 900;
+    margin-top: 3px !important;
+    margin-right: 4px !important;
+}
+.datos{
+   text-align:center;
+}
+.txtFinal{
+    text-align:center;
+}
+.botonesUsuario{
+    text-align:right;
+}
+.btn-info {
+    text-align:right;
+}
+.moverDerecha{
+    float:right;
+}
+.insertarTxtBusq{
+    margin-top:28px;
+}
+.navbar-collapse .collapse {
+    width: 100%;
+    height: 0%;
+    box-shadow: 0 2px 15px -2px #2a6c8b;
+    padding-bottom: -10px;
+    background-color: #2a6c8b !important;
+}
+
+.navbar-info .bg-info {
+    position: relative;
+    min-height: 50px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    background-color: #2a6c8b;
+}
+.navbar .li {
+    margin-left: 10px;
+    margin-right: 10px;
+    padding-left:15px;
+    padding-right:15px;
+}
+.navbar-nav .nav-link {
+    padding-right: 0;
+    padding-left: 0;
+    color: black !important;
+}
+.ContPerfil {
+    background-color: white !important;
+    box-shadow: 0 2px 15px -2px #2a6c8b;
+}
+.MiPerfilTXT{
+    margin-top:35px;
+}
+.ftPerfil{
+    margin-bottom:15px;
+}
+.barralateral {
+    background-color: gainsboro !important;
+}
+

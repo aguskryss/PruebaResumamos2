@@ -1,0 +1,329 @@
+﻿@using Proyectofinal.Models
+@model ComentariosYDenuncias
+@{
+    ViewBag.Title = "Resumen";
+    Resumenes res = BD.TraerResumen(ViewBag.id);
+    ViewBag.esc = BD.TraerNombreEscuelaxId(res.FkEscuela);
+    Usuarios usu = BD.TraerAutorResumen(ViewBag.id);
+    Materia mate = BD.TraerMateriaxId(res.FkMateria);
+    ViewBag.Comentarios = BD.TraerComentarios(ViewBag.id);
+    ViewBag.ListaDenu = BD.TraerMotivos();
+    string link = "whatsapp://send?text=https://resumamoss.azurewebsites.net/Home/Resumen/" + ViewBag.id;
+
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <title>Resumamos-Resumen</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<style>
+    .btnqsube {
+        margin-top: -5px;
+    }
+</style>
+<body>
+    <br />
+    <br />
+
+    <div class="container">
+        <!--
+            <div class="row">
+                <div class="col-md-3 col-12"></div>
+                <div class="col-md-6 col-12">
+                    <h3 class="Titulo">@res.Nombre </h3>
+                </div>
+                <div class="col-md-3 col-12">
+                    <center>
+                        <a href="@link"><h3><i class="fab fa-whatsapp" style="color:green;"></i></h3></a>
+                    </center>
+
+                </div>
+            </div>
+    -->
+            <div class="row">
+                <div class="col-md-10"></div>
+            
+                <div class="col-md-2 col-12">
+                    <center>
+                        <a href="@link" title="Compartir en Whatsapp"><h3><i class="fab fa-whatsapp" style="color:green;"></i></h3></a>
+                    </center>
+
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <center>
+                        <h3 class="Titulo">@res.Nombre </h3>
+                    </center>
+                </div>
+            </div>
+
+
+        <div class="row">
+            <div class="col-md-3 col-xs-6">
+
+                @if (Session["id"] == null)
+                {
+                    <button class="btn btn-success btn-block" id="btnSirvio" onclick="SumarMeGusta(@res.IdResumen,1)" disabled>Me sirvio <i class="fa fa-thumbs-up"></i></button>
+                }
+                else
+                {
+                    <button class="btn btn-success btn-block" style="display:@(ViewBag.Gusto?"none":"block")" id="btnSirvio" onclick="SumarMeGusta(@res.IdResumen,1)">Me sirvio <i class="fa fa-thumbs-up"></i></button>
+
+                    <br />
+                    <button class="btn btn-success btn-block btnqsube" style="display:@(ViewBag.Gusto?"block":"none")" id="btnNoSirvio" onclick="SumarMeGusta(@res.IdResumen,-1)">No me sirve mas <i class="fa fa-thumbs-down"></i></button>
+
+
+                    <small>Le sirvio a <b id="ContadorMeGusta">@res.Puntuacion</b> personas</small>
+                }
+            </div>
+
+            @if (Session["id"] == null)
+            {
+                <div class="col-md-3 col-xs-6">
+                    <button style="box-shadow: 0 2px 5px -2px black;" class="btn btn-success btn-block" id="btnSirvio" onclick="SumarMeGusta(@res.IdResumen,1)" disabled>Guardar <i class="far fa-file"></i></button>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-3 col-xs-6">
+                    @if (ViewBag.Guardo == -1)
+                    {
+                        <a style="box-shadow: 0 2px 5px -2px black;" href="@Url.Action("GuardarResumen", "Home", new { Id = res.IdResumen })" class="btn btn-success btn-block" role="button">Guardar <i class="far fa-file"></i></a>
+                    }
+                    else
+                    {
+                        <a style="box-shadow: 0 2px 5px -2px black;" href="@Url.Action("GuardarResumen", "Home", new { Id = res.IdResumen })" class="btn btn-success btn-block" role="button">Eliminar de guardado <i class="fas fa-file"></i></a>
+                    }
+                </div>
+            }
+
+
+
+
+            @if (Session["id"] != null)
+            {
+                <div class="col-md-3 col-xs-6">
+                    <a style="box-shadow: 0 2px 5px -2px black;" href="@Url.Action("ImageDownload", "Home", new { Id = res.IdResumen })" class="btn btn-success btn-block" role="button">Descargar <i class="fas fa-download"></i></a>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <button style="box-shadow: 0 2px 5px -2px black;" type="button" class="btn btn-danger btn-block" data-toggle="modal" data-target="#exampleModal">
+                        Reportar <i class="fas fa-exclamation-triangle"></i>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-md-3 col-xs-6">
+                    <button href="#" class="btn btn-success btn-block" role="button" disabled>Descargar <i class="fas fa-download"></i></button>
+                </div>
+
+                <div class="col-md-3 col-xs-6">
+                    <button type="button" class="btn btn-danger btn-block" disabled>
+                        Reportar <i class="fas fa-exclamation-triangle"></i>
+                    </button>
+                </div>
+            }
+
+
+
+        </div>
+        <br />
+
+        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Denunciar</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        @using (Html.BeginForm("DespuesDeDenunciarResumen", "Home", FormMethod.Post))
+                        {
+
+                            @Html.DropDownListFor(model => model.FkMotivo, new SelectList(ViewBag.ListaDenu, "IdMotivo", "Moti"), new { @class = "form-control" })<br />
+                            @Html.HiddenFor(model => model.FkResumen, new { Value = res.IdResumen })
+                            @Html.HiddenFor(model => model.FkUsuario, new { Value = -1 })
+                            @Html.HiddenFor(model => model.Fecha, new { Value = @DateTime.Now })
+                            @Html.HiddenFor(model => model.Contenido, new { Value = "" })
+                            @Html.HiddenFor(model => model.IdComentario, new { Value = -1 })
+                            @Html.HiddenFor(model => model.IdDenuncia, new { Value = -1 })
+
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <input type="submit" class="btn btn-success btn-block" value="Denunciar" />
+                                    </div>
+                                    <div class="col-6">
+
+                                        <button type="button" class="btn btn-secondary btn-block" data-dismiss="modal">Close <i class="fas fa-times"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+       
+        <div class="container">
+            <div class="row">
+                <div class="col-xs-12">
+                    <p><b>Descripcion:</b> @res.Descripcion</p>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <h4 class="Titulo bg-dark text-white">Comentarios</h4>
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    @foreach (Comentario com in ViewBag.Comentarios)
+                    {
+                        <center>
+                            <div class="card cardComent" style="box-shadow: 0 2px 5px -2px black;">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-7">
+                                            <h5 class="NombreUsComen">@BD.TraerNombreUsuario(com.FkUsuario)</h5>
+                                        </div>
+                                        <div class="col-5">
+                                            <h6 class="FechaComen">@com.Fecha.Day / @com.Fecha.Month / @com.Fecha.Year</h6>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <blockquote class="blockquote mb-0">
+                                        <p>@com.Contenido</p>
+                                    </blockquote>
+                                </div>
+                            </div>
+                        </center>
+                    }
+                </div>
+                <div class="col-lg-3"></div>
+            </div>
+            <br />
+            <br />
+            @if (Session["id"] != null)
+            {
+
+
+
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        @using (Html.BeginForm("InsertarComentario", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+
+                            <div class="row form-group">
+                                <div class="col-md-12">
+                                    <input type="text" value="" class="form-control" required placeholder="Escribe un comentario..." @Html.TextBoxFor(model => model.Contenido)
+
+                                </div>
+                            </div>
+                            @Html.HiddenFor(model => model.FkResumen, new { Value = res.IdResumen })
+                            @Html.HiddenFor(model => model.FkUsuario, new { Value = Session["id"] })
+                            @Html.HiddenFor(model => model.Fecha, new { Value = @DateTime.Now })
+                            @Html.HiddenFor(model => model.FkMotivo, new { Value = -1 })
+                            @Html.HiddenFor(model => model.IdComentario, new { Value = -1 })
+                            @Html.HiddenFor(model => model.IdDenuncia, new { Value = -1 })
+                            <center>
+                                <input type="submit" class="btn btn-primary " value="Comentar" />
+                            </center>
+                        }
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+            }
+
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+
+
+
+    <center>
+        <div class="datos" style="margin-left:10px;">
+            <div class="container">
+
+
+            <div class="row">
+                <i class="fas fa-user txtFinal"></i><p>Autor: <b>@usu.Nombre  @usu.Apellido </b></p>
+            </div>
+
+
+            <div class="row">
+                <i class="fas fa-school txtFinal"></i> <p>Escuela: <b>@ViewBag.esc</b></p>
+            </div>
+
+            <div class="row">
+                <i class="fas fa-book-open txtFinal"></i> <p>Materia: <b>@mate.NombreMateria </b></p>
+            </div>
+
+             </div>
+        </div>
+        
+    </center>
+    <script type="text/javascript">
+       
+
+
+        function SumarMeGusta(idResumen, cant) {
+            $.ajax({
+                url: '/Home/SumarMeGusta/' + idResumen,
+                success: function (data) {
+                    $("#ContadorMeGusta").html(data);
+                    if (cant == 1) {
+                        document.getElementById("btnSirvio").style.display = "none";
+                        document.getElementById("btnNoSirvio").style.display = "block";
+                    } else {
+                        document.getElementById("btnNoSirvio").style.display = "none";
+                        document.getElementById("btnSirvio").style.display = "block";
+                    }
+
+                    return false;
+                },
+                statusCode: {
+                    404: function (content) { alert('cannot find resource'); },
+                    500: function (content) { alert('internal server error'); }
+                },
+                error: function (req, status, errorObj) {
+                    // handle status === "timeout"
+                    // handle other errors
+                }
+            });
+
+
+        }
+    </script>
+</body>
+</html>

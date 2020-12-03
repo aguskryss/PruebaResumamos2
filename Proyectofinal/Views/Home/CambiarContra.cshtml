@@ -1,0 +1,140 @@
+﻿@using Proyectofinal.Models
+@model Contra
+@{
+    ViewBag.Title = "Cambiar contraseña";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <title>Resumamos-Cambiar contraseña</title>
+</head>
+<body>
+    <br />
+    <br />
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <center>
+                    <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                        @using (Html.BeginForm("DespuesDeCambiar", "Home", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w" }))
+                        {
+                            <h2>
+                                <b>
+                                    Cambiar contraseña
+                                </b>
+                            </h2>
+
+
+                            <div class="p-t-13 p-b-9">
+                                <span class="txt1">
+                                    Contraseña anterior
+                                </span>
+
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Contraseña incorrecta">
+                                <input type="password" style="box-shadow: 0 2px 10px -2px black;" class="form-control" required placeholder="Contraseña" id="myInput"
+                                       @Html.TextBoxFor(model => model.ContraVieja)
+
+                                <input type="checkbox" onclick="myFunction()"> Ver contraseña
+                                <br />
+                                <br />
+                            </div>
+                            <div class="p-t-13 p-b-9">
+                                <span class="txt1">
+                                    Contraseña nueva
+                                </span>
+
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="">
+                                <input type="password" style="box-shadow: 0 2px 10px -2px black;" class="form-control" required placeholder="Contraseña" id="myInput1"
+                                       @Html.TextBoxFor(model => model.Contra1)
+
+                                <input type="checkbox" onclick="myFunction1()"> Ver contraseña
+                                <br />
+                                <br />
+                            </div>
+                            <div class="p-t-13 p-b-9">
+                                <span class="txt1">
+                                    Repetir Contraseña nueva
+                                </span>
+
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Las contraseñas no coinciden">
+                                <input type="password" style="box-shadow: 0 2px 10px -2px black;" class="form-control" required placeholder="Contraseña" id="myInput2"
+                                       @Html.TextBoxFor(model => model.Contra2)
+
+                                <input type="checkbox" onclick="myFunction2()"> Ver contraseña
+                                <br />
+                                <br />
+                            </div>
+
+                            <a href="@Url.Action("Olvidar", "Home")" class="txt2 bo1 m-l-5">
+                                ¿Olvidaste tu contraseña?
+                            </a>
+                            @Html.HiddenFor(model => model.idUsuario, new { Value = Session["id"] })
+                            <br />
+                            <div class="BotonIniciar">
+                                <button class="login100-form-btn btn btn-primary" style="box-shadow: 0 2px 10px -2px black;">
+                                    Cambiar contraseña
+                                </button>
+                            </div>
+                            <br />
+
+
+                        }
+
+                        <br />
+                    </div>
+                </center>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        function myFunction1() {
+            var x = document.getElementById("myInput1");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+
+        function myFunction2() {
+            var x = document.getElementById("myInput2");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>
+
+
+

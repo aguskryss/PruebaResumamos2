@@ -1,0 +1,68 @@
+﻿@using Proyectofinal.Models;
+@model BuscadorLibros
+@{
+    ViewBag.Title = "Insertar Materia";
+}
+
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+    
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <center>
+                    <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                        @using (Html.BeginForm("DespuesDeInsertarEscuela", "Backoffice", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w" }))
+                        {
+                            <h2>
+                                <b>
+                                    Insertar escuela
+                                </b>
+                            </h2>
+
+                            <div class="row">
+                                <div class="col-12">
+                                    <input type="text" class="form-control" placeholder="Nombre" @Html.TextBoxFor(model => model.Busueda) <br />
+                                </div>
+                            </div>
+
+                            <input type="submit" value="Insertar" class="btn btn-success" />
+
+                        }
+
+                        <br />
+                    </div>
+                </center>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+        <br />
+        <center>
+            <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+        </center>
+        <br />
+        <br />
+    </div>
+</body>
+</html>
+
+

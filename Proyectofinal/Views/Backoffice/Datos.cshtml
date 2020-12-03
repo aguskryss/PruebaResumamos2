@@ -1,0 +1,84 @@
+﻿@using Proyectofinal.Models
+@{
+    ViewBag.Title = "Datos";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <style>
+        .Titulo {
+            text-align: center !important;
+        }
+    </style>
+    <br />
+    <br />
+    <div class="container">
+        <h3 class="Titulo"><b>Datos</b></h3>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="card bg-primary text-white" style="border-bottom: 4px solid #007bff !important;">
+                    <div class="card-body">Cantidad de resumenes: @ViewBag.lista</div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="card bg-primary text-white" style="border-bottom: 4px solid #007bff !important;">
+                    <div class="card-body">Cantidad de libros: @ViewBag.lib</div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="card bg-danger text-white" style="border-bottom: 4px solid #dc3545 !important;">
+                    <div class="card-body">Cantidad de resumenes sin aprobar: @ViewBag.ressin </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="card bg-danger text-white" style="border-bottom: 4px solid #dc3545 !important;">
+                    <div class="card-body">Cantidad de libros sin aprobar: @ViewBag.libsin</div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-6 col-12">
+                <div class="card bg-success text-white" style="border-bottom: 4px solid #28a745 !important;">
+                    <div class="card-body">Cantidad de usuarios: @ViewBag.usu </div>
+                </div>
+            </div>
+            <div class="col-lg-6 col-12">
+                <div class="card bg-success text-white" style="border-bottom: 4px solid #28a745 !important;">
+                    <div class="card-body">Cantidad de libros vendidos: @ViewBag.vend </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br />
+    <center>
+        <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+    </center>
+    <br />
+    <br />
+
+</body>
+</html>

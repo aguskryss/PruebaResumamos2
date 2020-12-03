@@ -1,0 +1,104 @@
+﻿@using Proyectofinal.Models;
+@model Usuarios
+@{
+    ViewBag.Title = "Borrar resumen";
+    List<Usuarios> Lista = BD.TraerUsuarios();
+
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <title>Resumamos</title>
+</head>
+<body>
+    <br />
+    <br />
+
+    <div class="container">
+        <h3 style="text-align:center;"><b>Eliminar usuario</b></h3>
+        <div class="row">
+
+
+            <table class="table table-striped" id="tblData">
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Apellido</th>
+                        <th scope="col">Eliminar</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (Usuarios u in Lista)
+                    {
+                    <tr>
+                        <th>@u.Nombre</th>
+                        <th>@u.Apellido</th>
+                        <td>
+                            <a type="Button" class="btn btn-danger btn-sm" href="@Url.Action("BorrarU", "Backoffice", new { id = u.IdUsuario })">Eliminar</a>
+                        </td>
+
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <center>
+        <button class="btn btn-primary" onclick="exportTableToExcel('tblData')">Exportar a excel</button>
+    </center>
+    <br />
+    <center>
+        <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+    </center>
+    <br />
+    <br />
+
+
+    <script>
+        function exportTableToExcel(tableID, filename = '') {
+            var downloadLink;
+            var dataType = 'application/vnd.ms-excel';
+            var tableSelect = document.getElementById(tableID);
+            var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+            // Specify file name
+            filename = filename ? filename + '.xls' : 'usuarios.xls';
+
+            // Create download link element
+            downloadLink = document.createElement("a");
+
+            document.body.appendChild(downloadLink);
+
+            if (navigator.msSaveOrOpenBlob) {
+                var blob = new Blob(['ufeff', tableHTML], {
+                    type: dataType
+                });
+                navigator.msSaveOrOpenBlob(blob, filename);
+            } else {
+                // Create a link to the file
+                downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+
+                // Setting the file name
+                downloadLink.download = filename;
+
+                //triggering the function
+                downloadLink.click();
+            }
+        }
+    </script>
+</body>
+</html>

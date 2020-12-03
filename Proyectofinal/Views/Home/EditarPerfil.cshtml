@@ -1,0 +1,110 @@
+﻿@using Proyectofinal.Models
+@model Usuarios
+@{
+    ViewBag.Title = "Editar perfil";
+    Usuarios usuario = BD.TraerUsuario(ViewBag.id);
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Resumamos-Editar perfil</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+   
+    <div class="container">
+        <h2 class="Titulo"><b>Editar mi perfil</b></h2>
+        <br />
+        <div class="row">
+            <div class="col-lg-2"></div>
+            <div class="col-lg-8 col-12">
+                @using (Html.BeginForm("DespuesDeEditarPerfil", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                {
+                    <center>
+                        <div class="form-group-sm">
+                            <div class="container">
+
+                                <div class="row">
+                                    <div class="col-8">
+                                        @if (usuario.NombreImagen != "")
+                                        {
+                                            <img src="~/Content/Archivos/@usuario.NombreImagen" class="img-circle ftPerfil" alt="Mi perfil" height="150" width="150">
+                                        }
+                                        else
+                                        {
+                                            <img src="~/Content/Archivos/perfil.jpeg" class="img-circle ftPerfil" alt="Mi perfil" height="150" width="150">
+
+                                        }
+                                    </div>
+                                    <div class="col-4">
+                                        <h4><b class="txtSubirRes">Foto de perfil:</b></h4>@Html.TextBoxFor(model => model.Archivo, new { type = "file" })<br />
+                                    </div>
+                                </div>
+                                <br />
+                                <br />
+                                <div class="row">
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" style="box-shadow: 0 2px 10px -2px black;" placeholder="Nombre" value="@usuario.Nombre" @Html.TextBoxFor(model => model.Nombre) @Html.ValidationMessageFor(model => model.Nombre) <br />
+                                    </div>
+                                    <div class="col-md-6 col-sm-12">
+                                        <input type="text" class="form-control" style="box-shadow: 0 2px 10px -2px black;" placeholder="Apellido" value="@usuario.Apellido" @Html.TextBoxFor(model => model.Apellido) @Html.ValidationMessageFor(model => model.Apellido) <br />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" style="box-shadow: 0 2px 10px -2px black;" placeholder="Mail" value="@usuario.Mail" @Html.TextBoxFor(model => model.Mail) @Html.ValidationMessageFor(model => model.Mail) <br />
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control" style="box-shadow: 0 2px 10px -2px black;" placeholder="Usuario" value="@usuario.Username" @Html.TextBoxFor(model => model.Username) @Html.ValidationMessageFor(model => model.Username) <br />
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-2 col-4">
+                                        <h4><b class="txtSubirRes">Escuela:</b></h4>
+                                    </div>
+                                    <div class="col-md-10  col-8">
+                                        <select class="form-control" style="box-shadow: 0 2px 10px -2px black;" @Html.DropDownListFor(model => model.Escuela, new SelectList(ViewBag.ListaEscuelas, "IdEscuela", "NombreEscuela"))<br />
+                                    </div>
+                                </div>
+
+                                <br />
+                                <!--Hidden fors-->
+                                @Html.HiddenFor(model => model.Admin)
+                                @Html.HiddenFor(model => model.Puntuacion)
+                                @Html.HiddenFor(model => model.Creditos)
+                                @Html.HiddenFor(model => model.Contra2)
+                                @Html.HiddenFor(model => model.Contrasena)
+                                @Html.HiddenFor(model => model.IdUsuario)
+                                <input type="submit" class="btn btn-primary" style="box-shadow: 0 2px 10px -2px black;" value="Actualizar" />
+                            </div>
+                        </div>
+                    </center>
+                }
+            </div>
+            <div class="col-lg-2"></div>
+        </div>
+
+    </div>
+</body>
+</html>
+

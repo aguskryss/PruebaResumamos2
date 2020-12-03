@@ -1,0 +1,105 @@
+﻿@using Proyectofinal.Models
+@{ 
+    ViewBag.Title = "Ver denuncias";
+    int d = -1;
+}
+<html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <style>
+            .tit{
+                text-align:center !important;
+            }
+        </style>
+        <br />
+        <br />
+        
+        <div class="container">
+            
+                <div class="row">
+                    <center>
+                        <h2 style="text-align:center !important;"><b>Denuncias por motivos</b></h2>
+                        <br />
+                        <br />
+                    </center>
+                </div>
+            
+            @foreach (Denuncia denu in ViewBag.lista)
+            {
+
+                if (denu.FkMotivo != d)
+                {
+                    d = denu.FkMotivo;
+                    <br />
+
+                    <center>
+                        <h3 class="bg-primary">@BD.TraerMotivoEspe(denu.FkMotivo).Moti</h3>
+                    </center>
+
+
+                    <br />
+                }
+                Resumenes res = BD.TraerResumen(denu.FkResumen);
+                <center>
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-8 col-xs-12">
+                        <div class="card" style="box-shadow: 0 2px 10px -2px black;">
+                            <div class="card-body">
+                                <h4 class="card-title alert-info">@res.Nombre</h4>
+                                <p class="card-text">@BD.TraerMateriaxId(res.FkMateria).NombreMateria</p>
+                                <p class="card-text">@BD.TraerEscuelaxId(res.FkEscuela).NombreEscuela</p>
+                                <p class="card-text"> Puntuacion: @res.Puntuacion</p>
+                                <p class="card-text"> Autor: @BD.TraerAutorResumen(res.IdResumen).Nombre @BD.TraerAutorResumen(res.IdResumen).Apellido</p>
+                                <p class="card-text"> Denunciante: @BD.TraerNombreUsuario(denu.FkUsuario) </p>
+                                <p class="card-text"> Puntuacion autor: @BD.TraerAutorResumen(res.IdResumen).Puntuacion</p>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <center>
+                                                <a href="@Url.Action("Resumen", "Backoffice", new { Id = denu.IdDenuncia })" class="btn-block btn-outline-success"><b>Ver resumen</b></a>
+                                            </center>
+                                        </div>
+                                        <div class="col-6">
+                                            <center>
+                                                <a href="@Url.Action("Descartar", "Backoffice", new { Id = denu.IdDenuncia })" class="btn-block btn-outline-danger"><b>Descartar denuncia</b></a>
+                                            </center>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-2"></div>
+                </center>
+
+            }
+
+
+        </div>
+
+        <br />
+        <center>
+            <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+        </center>
+        <br />
+        <br />
+
+
+    </body>
+</html>
+

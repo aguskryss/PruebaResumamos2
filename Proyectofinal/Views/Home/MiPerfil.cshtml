@@ -1,0 +1,118 @@
+﻿@using Proyectofinal.Models
+@model Buscador
+@{
+    ViewBag.Title = "Perfil";
+    Usuarios usu = BD.TraerUsuario(ViewBag.id);
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Resumamos-Perfil</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+   
+
+    <div class="container ContPerfil bg-primary">
+
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-7 col-6">
+                    <h4 class="MiPerfilTXT"><b>Mi perfil</b></h4>
+                </div>
+                <div class="col-lg-2 col-6">
+                    <a href="@Url.Action("EditarPerfil", "Home")" class="btn btn-primary btn-block" role="button">Editar</a>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <a href="@Url.Action("CambiarContra", "Home")" class="btn btn-primary btn-block" role="button">Cambiar contraseña <i class="fas fa-key"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <center>
+        <div class="card-body">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-4">
+                        @if (usu.NombreImagen != "")
+                        {
+                            <img src="~/Content/Archivos/@usu.NombreImagen" class="img-circle ftPerfil" alt="Mi perfil" height="150" width="150">
+                        }
+                        else
+                        {
+                            <img src="~/Content/Archivos/perfil.jpeg" class="img-circle ftPerfil" alt="Mi perfil" height="150" width="150">
+
+                        }
+                    </div>
+
+                    <div class="col-md-8">
+                        <div class="container">
+
+                            <div class="row">
+                                <h4>Nombre: <b>@usu.Nombre @usu.Apellido</b></h4>
+                                <br />
+                            </div>
+
+                            <div class="row">
+                                <h4>Usuario: <b>@usu.Username</b></h4>
+                                <br />
+                            </div>
+                            <div class="row">
+                                <h4>Mail: <b>@usu.Mail</b></h4>
+                                <br />
+                            </div>
+                            <div class="row">
+                                <h4>Puntuacion: <b>@usu.Puntuacion</b></h4>
+                                <br />
+                            </div>
+                            <div class="row">
+                                <h4>Escuela: <b>@BD.TraerNombreEscuelaxId(usu.Escuela)</b></h4>
+                                <br />
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </center>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6">
+                <a class="btn btn-primary btn-block" href="@Url.Action("MisLibros", "Home")">Mis libros</a>
+            </div>
+
+            <div class="col-md-3 col-6">
+                <a class="btn btn-primary btn-block" href="@Url.Action("MisResumenes", "Home")">Mis resumenes</a>
+
+            </div>
+            <div class="col-md-3 col-6">
+                <a class="btn btn-primary btn-block" href="@Url.Action("Guardados", "Home")">Resumenes Guardados</a>
+
+            </div>
+            <div class="col-md-3 col-6">
+                <a class="btn btn-primary btn-block" href="@Url.Action("GuardadosLib", "Home")">Ver Libros Guardados</a>
+            </div>
+        </div>
+    </div>
+    <br />
+    <br />
+
+
+</body>
+</html>
+

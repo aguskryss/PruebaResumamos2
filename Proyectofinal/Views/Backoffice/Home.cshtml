@@ -1,0 +1,73 @@
+﻿@using Proyectofinal.Models;
+@{
+    ViewBag.Title = "Panel";
+}
+    <html>
+    <head>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+        @Styles.Render("~/Content/css")
+        @Scripts.Render("~/bundles/modernizr")
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+        <title>Resumamos</title>
+    </head>
+    <body>
+        <br />
+        <br />
+        
+        <center>
+            <h2><b class="text-center">Bienvenido al panel de control de RESUMAMOS!</b></h2>
+        </center>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-12">
+                    <a href="@Url.Action("VerDenuncias", "Backoffice")" class="btn btn-danger btn-lg btn-block" role="button">Ver denuncias <i class="fas fa-exclamation-triangle"></i> </a>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <a href="@Url.Action("Aprobar", "Backoffice")" class="btn btn-success btn-lg btn-block" role="button">Aprobar resumenes <i class="fas fa-check"></i> </a>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <a href="@Url.Action("AprobarL", "Backoffice")" class="btn btn-success btn-lg btn-block" role="button">Aprobar Libros <i class="fas fa-check"></i> </a>
+                </div>
+                <div class="col-lg-3 col-12">
+                    <a href="@Url.Action("Datos", "Backoffice")" class="btn btn-warning btn-lg btn-block" role="button">Ver Info <i class="fas fa-info"></i> </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6 col-lg-6">
+                    <a href="@Url.Action("InsertarMateria", "Backoffice")" class="btn btn-primary btn-block" role="button">Agregar materia  </a>
+                </div>
+                <div class="col-6 col-lg-6">
+                    <a href="@Url.Action("InsertarEscuela", "Backoffice")" class="btn btn-primary btn-block" role="button">Agregar escuela  </a>
+                </div>
+                </div>
+            <div class="row">
+                <div class="col-6 col-lg-3">
+                    <a href="@Url.Action("BorrarResumen", "Backoffice")" class="btn btn-primary btn-block" role="button"> Resumenes </a>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <a href="@Url.Action("BorrarLibros", "Backoffice")" class="btn btn-primary btn-block" role="button"> Libros   </a>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <a href="@Url.Action("BorrarMateria", "Backoffice")" class="btn btn-primary btn-block" role="button">Borrar materia  </a>
+                </div>
+                <div class="col-6 col-lg-3">
+                    <a href="@Url.Action("BorrarEscuela", "Backoffice")" class="btn btn-primary btn-block" role="button">Borrar escuela  </a>
+                </div>
+            </div>
+            </div>
+       
+
+
+
+    </body>
+</html>

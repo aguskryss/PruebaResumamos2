@@ -1,0 +1,78 @@
+﻿@using Proyectofinal.Models
+@{
+    ViewBag.Title = "Mis libros";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <title>Resumamos-Mis libros</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <!-- Hero Section -->
+
+        <br />
+        <br />
+
+
+
+
+        <!-- Stats Gallery Section -->
+        <h3 class="Titulo"><b>Mis Libros</b></h3>
+
+        <div class="col1 pt-2 clear" style=" border-bottom:#d2d2d2 1px solid; padding-bottom:40px; ">
+            <div class="col1_2 fl l-2 clear">
+                <div class="container-">
+                    <div class="row">
+
+                        @foreach (Libro li in ViewBag.lista)
+                        {
+
+
+                            <div class="col-lg-3 col-xs-6">
+                                <div class="card" style="box-shadow: 0 3px 10px -3px black;">
+                                    <div class="card-body">
+                                        <h4 class="card-title alert-info">@li.Nombre</h4>
+                                        <p class="card-text">@BD.TraerMateriaxId(li.FkMateria).NombreMateria</p>
+                                        <p class="card-text">@BD.TraerEscuelaxId(li.FkEscuela).NombreEscuela</p>
+                                        <p class="card-text">@BD.TraerNombreUsuario(li.FkVendedor)</p>
+                                        <div class="verMas">
+                                            <a href="@Url.Action("MiLibro", "Home", new { Id = li.IdLibro })" class="btn-sm btn-dark btn-block"><b>Ver mas</b></a>
+                                            <a href="@Url.Action("EliminarLi", "Home", new { Id = li.IdLibro})" class="btn-sm btn-primary btn-block"><b>Eliminar Libro</b></a>
+                                            <a href="@Url.Action("ModificarLibro", "Home", new { Id = li.IdLibro })" class="btn-sm btn-success btn-block"><b>Modificar Libro</b></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        }
+
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+        <br />
+        <br />
+        <br />
+        <!-- Footer Section -->
+        <!-- Copyrights Section -->
+        <!-- Main Container Ends -->
+    </div>
+</body>
+</html>

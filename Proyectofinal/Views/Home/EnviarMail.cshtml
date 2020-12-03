@@ -1,0 +1,42 @@
+﻿@using Proyectofinal.Models
+@{
+    ViewBag.Title = "Correo enviado";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Resumamos</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+
+<br />
+<br />
+
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <center>
+                <h3><b> Hemos enviado un mail a su casilla de correo electronico para que pueda reestablecer su contraseña, en caso de no encontrarlo busquelo en su carpeta de correos no deseado</b></h3>
+                <br/>
+                <a href="@Url.Action("Index", "Home")" style="box-shadow: 0 2px 10px -2px black;" class="btn-lg btn-primary"><b>Volver a la home <i class="fas fa-home"></i></b></a>
+            </center>
+            <br />
+            <br />
+        </div>
+    </div>
+</body>
+</html>

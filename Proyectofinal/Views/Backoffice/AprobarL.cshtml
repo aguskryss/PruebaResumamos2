@@ -1,0 +1,128 @@
+﻿@using Proyectofinal.Models
+@{
+    ViewBag.Title = "Aprobar";
+}
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+    <title>Resumamos</title>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <!-- Hero Section -->
+
+        <br />
+        <br />
+
+
+
+
+        <!-- Stats Gallery Section -->
+        <div class="content content-shadow1">
+            <div class="size_mother">
+
+                <h3 class="Titulo"><b>Libros sin aprobar</b></h3>
+                <div class="col1 pt-2 clear" style=" border-bottom:#d2d2d2 1px solid; padding-bottom:40px; ">
+                    <div class="col1_2 fl l-2 clear">
+                        <div class="container-">
+                            <div class="row">
+
+                                @foreach (Libro li in ViewBag.lista)
+                                {
+
+                                    <div class="col-lg-6 col-xs-12">
+                                        <div class="card" style="box-shadow: 0 2px 10px -2px black;">
+                                            <a href="@Url.Action("MiLibros", "Backoffice", new { Id = li.IdLibro })">
+
+                                                <div class="card-body">
+                                                    <div class="container">
+                                                        <div class="row">
+                                                            <div class="col-4">
+                                                                <img src="~/Content/Archivos/@li.NombreImagen" height="60px" width="60px" alt="...">
+                                                            </div>
+                                                            <div class="col-8">
+                                                                <center>
+                                                                    <h5 class="card-title">@li.Nombre</h5>
+                                                                    <p class="card-text">Precio: $@li.Precio</p>
+
+                                                                </center>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </a>
+                                            <div class="container">
+                                                <div class="row">
+                                                    <div class="col-lg-12 col-xs-12">
+                                                        <center>
+                                                            <a href="@Url.Action("AgregarMP","Backoffice", new { Id = li.IdLibro })" class="btn btn-outline-success btn-block" role="button">Agregar link <i class="fas fa-thumbs-up"></i></a>
+                                                        </center>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+                                }
+
+                            </div>
+                            <center>
+                                <div class="row">
+                                    <div class="col-lg-6 col-xs-6">
+                                        <a href="@Url.Action("AprobarTodosLibros","Backoffice")" class="btn btn-lg btn-primary">Aprobar todos</a>
+                                    </div>
+                                    <div class="col-lg-6 col-xs-6">
+                                        <a href="@Url.Action("RechazarTodosLosLibros","Backoffice")" class="btn btn-lg btn-danger">Rechazar todos</a>
+                                    </div>
+                                </div>
+                            </center>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+        <br />
+        <center>
+            <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+        </center>
+        <br />
+        <br />
+
+
+    </div>
+
+
+    <!-- Footer Section -->
+    <!-- Copyrights Section -->
+    <!-- Main Container Ends -->
+</body>
+</html>
+

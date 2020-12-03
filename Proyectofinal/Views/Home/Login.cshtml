@@ -1,0 +1,116 @@
+﻿@using Proyectofinal.Models
+@model Login
+@{
+    ViewBag.Title = "Login";
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+    <title>Resumamos-Login</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+
+<br />
+<br />
+
+<body>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3"></div>
+            <div class="col-lg-6">
+                <center>
+                    <div class="wrap-login100 p-l-110 p-r-110 p-t-62 p-b-33">
+                        @using (Html.BeginForm("ValidarLoginUsuario", "Home", FormMethod.Post, new { @class = "login100-form validate-form flex-sb flex-w" }))
+                        {
+                            <h2>
+                                <b>
+                                    Iniciar sesión
+                                </b>
+                            </h2>
+
+                            <div class="p-t-31 p-b-9">
+                                <span class="txt1">
+                                    Nombre de usuario
+                                </span>
+                            </div>
+
+                            <div class="wrap-input100 validate-input" data-validate="Nombre de usuario incorrecto">
+                                <input type="text" class="form-control" required placeholder="Usuario"
+                                       @Html.TextBoxFor(model => model.Username, new { @class = "input100" })
+                                <span class="focus-input100">
+                                    @Html.ValidationMessageFor(model => model.Username)
+                                </span>
+                            </div>
+
+                            <div class="p-t-13 p-b-9">
+                                <span class="txt1">
+                                    Contraseña
+                                </span>
+
+                            </div>
+                            <div class="wrap-input100 validate-input" data-validate="Contraseña incorrecta">
+                                <br/>
+                                <input type="password" class="form-control" required placeholder="Contraseña" id="myInput"
+                                       @Html.PasswordFor(model => model.Contrasena, new { @class = "input100" })
+                                <br/>
+                                       <input type="checkbox" onclick="myFunction()"> Ver contraseña
+                                <br/>
+                                <span class="focus-input100">
+                                    @Html.ValidationMessageFor(model => model.Contrasena)
+                                </span>
+                                <br />
+                                <a href="@Url.Action("Olvidar", "Home")" class="txt2 bo1 m-l-5">
+                                    ¿Olvidaste tu contraseña?
+                                </a>
+                            </div>
+                            
+                            <br />
+                            <div class="BotonIniciar">
+                                <button class="login100-form-btn btn btn-primary">
+                                    Iniciar sesión
+                                </button>
+                            </div>
+                            <br />
+                            <div class="w-full text-center p-t-55">
+                                <span class="txt2">
+                                    ¿No estas registrado?
+                                </span>
+                                <a href="@Url.Action("Registrarse", "Home")" class="txt2 bo1">
+                                    Registráte ahora
+                                </a>
+                            </div>
+
+                        }
+
+                        <br />
+                    </div>
+                </center>
+            </div>
+            <div class="col-lg-3"></div>
+        </div>
+    </div>
+    <script>
+        function myFunction() {
+            var x = document.getElementById("myInput");
+            if (x.type === "password") {
+                x.type = "text";
+            } else {
+                x.type = "password";
+            }
+        }
+    </script>
+</body>
+</html>

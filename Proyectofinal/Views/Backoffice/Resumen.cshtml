@@ -1,0 +1,133 @@
+﻿@using Proyectofinal.Models
+@model ComentariosYDenuncias
+@{
+    ViewBag.Title = "Resumen";
+    Resumenes res = BD.TraerResumen(ViewBag.id);
+    ViewBag.esc = BD.TraerNombreEscuelaxId(res.FkEscuela);
+    Usuarios usu = BD.TraerAutorResumen(ViewBag.id);
+    Materia mate = BD.TraerMateriaxId(res.FkMateria);
+    ViewBag.Comentarios = BD.TraerComentarios(ViewBag.id);
+    ViewBag.ListaDenu = BD.TraerMotivos();
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+    <br />
+    <br />
+   
+    <div class="container">
+        <h3 class="Titulo">@res.Nombre </h3>
+        <div class="row">
+            <div class="col-md-4 col-xs-12">
+                <a href="@Url.Action("Descartar", "Backoffice", new { Id = ViewBag.idDenu })" class="btn btn-success btn-block" role="button">Descartar denuncia</a>
+            </div>
+
+            <div class="col-md-4 col-xs-12">
+                <a href="@Url.Action("EliminarResumenXDenuncia", "Backoffice", new { Id = ViewBag.idDenu })" class="btn btn-success btn-block" role="button">Eliminar resumen</a>
+            </div>
+
+            <div class="col-md-4 col-xs-12">
+                <a href="@Url.Action("ImageDownload", "Home", new { Id = res.IdResumen })" class="btn btn-success btn-block" role="button">Descargar <i class="fas fa-download"></i></a>
+            </div>
+           
+                <div class="col-xs-12 col-lg-12">
+                    <p><b>Descripcion:</b> @res.Descripcion</p>
+                </div>
+            
+            <br />
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        <h4 class="Titulo bg-dark text-white">Comentarios</h4>
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+
+                <div class="row">
+                    <div class="col-lg-3"></div>
+                    <div class="col-lg-6">
+                        @foreach (Comentario com in ViewBag.Comentarios)
+                        {
+                            <center>
+                                <div class="card cardComent">
+                                    <div class="card-header">
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <h5 class="NombreUsComen">@BD.TraerNombreUsuario(com.FkUsuario)</h5>
+                                            </div>
+                                            <div class="col-4">
+                                                <h6 class="FechaComen">@com.Fecha.Day / @com.Fecha.Month / @com.Fecha.Year</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <blockquote class="blockquote mb-0">
+                                            <p>@com.Contenido</p>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </center>
+                        }
+                    </div>
+                    <div class="col-lg-3"></div>
+                </div>
+                <br />
+                <br />
+
+            </div>
+        </div>
+        <br />
+        <br />
+        <br />
+
+
+
+        <center>
+            <div class="container">
+                <div class="datos">
+
+                    <div class="row">
+                        <i class="fas fa-user txtFinal"></i><p>Autor: <b>@usu.Nombre  @usu.Apellido </b></p>
+                    </div>
+
+
+                    <div class="row">
+                        <i class="fas fa-school txtFinal"></i> <p>Escuela: <b>@ViewBag.esc</b></p>
+                    </div>
+
+                    <div class="row">
+                        <i class="fas fa-book-open txtFinal"></i> <p>Materia: <b>@mate.NombreMateria </b></p>
+                    </div>
+
+
+                </div>
+            </div>
+        </center>
+
+        <br />
+        <center>
+            <a type="Button" class="btn btn-primary" href="@Url.Action("index", "Backoffice")">Volver a la home <i class="fas fa-home"></i></a>
+        </center>
+        <br />
+        <br />
+        </div>
+</body>
+</html>
